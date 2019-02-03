@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form_cus" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.stock</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="31"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]//div[@data-key='stock']" position="inside">
+                    <h2>Product Expiry Email Alert</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="mailsend_check"/>
+                            </div>
+                            <div class="o_setting_right_pane" id="barcode_settings">
+                                <label for="mailsend_check"/>
+                                <div class="text-muted">
+                                    Send Product Expiry Email
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16" attrs="{'invisible': [('mailsend_check','=',False)]}">
+                                        <span>Email notification for product expire in
+                                            <field name="email_notification_days" class="oe_inline"
+                                                   style="width:20% !important"/>
+                                            days
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <div class="content-group">
+                                    <div class="mt16" attrs="{'invisible': [('mailsend_check','=',False)]}">
+                                        <span>Product Expiry Alert Mail Send To The User
+                                            <field name="res_user_ids" class="oe_inline" widget="many2many_tags"/>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

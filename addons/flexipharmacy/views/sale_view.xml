@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="acespritech_view_partner_property_form" model="ir.ui.view">
+        <field name="name">acespritech.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="point_of_sale.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <field name="barcode" position="before">
+                <group col="4" colspan="4">
+                    <field name="prefer_ereceipt"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <record id="aspl_view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_total" position="after">
+                <field name="amount_due"/>
+            </field>
+            <field name="payment_term_id" position="after">
+                <field name="signature" widget="image" options="{'size': [90, 90]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

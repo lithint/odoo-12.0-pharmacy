@@ -1,0 +1,48 @@
+/*The OrderList List Screen */
+.pos .sale-orderlist-screen .sale-order-list, .pos .invoice-list-screen .order-invoice-list
+	{
+	font-size: 16px;
+	width: 100%;
+	line-height: 40px;
+}
+
+.pos .sale-orderlist-screen .sale-order-list th, .pos .sale-orderlist-screen .sale-order-list td,
+	.pos .invoice-list-screen .order-invoice-list th, .pos .invoice-list-screen .order-invoice-list td
+	{
+	padding: 0px 5px;
+}
+
+.pos .sale-orderlist-screen .sale-order-list tr.highlight, .pos .invoice-list-screen .order-invoice-list tr.highlight
+	{
+	transition: all 150ms linear;
+	background: rgb(110, 200, 155) !important;
+	color: white;
+}
+
+.pos .sale-orderlist-screen .sale-order-list tr.lowlight, .pos .invoice-list-screen .order-invoice-list tr.lowlight
+	{
+	transition: all 150ms linear;
+	background: rgb(216, 238, 227);
+}
+
+.pos .sale-orderlist-screen .sale-order-list tr.lowlight:nth-child(even),
+	.pos .invoice-list-screen .order-invoice-list tr.lowlight:nth-child(even)
+	{
+	transition: all 150ms linear;
+	background: rgb(227, 246, 237);
+}
+
+.sale-orderlist-screen .top-content .button.draft {
+	left: 0px;
+	margin-left: 250px;
+}
+
+.invoice-list-screen .button.draft {
+	left: 0px;
+	margin-left: 120px;
+}
+
+.invoice-list-screen .button.open {
+	left: 0px;
+	margin-left: 235px;
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="email_template_product_expiry_alert" model="mail.template">
+            <field name="name">Product Expiry Alert</field>
+            <field name="email_from">ravi.acespritech@gmail.com</field>
+            <field name="subject">Product Expiry Alert</field>
+            <field name="email_to">${ctx['email_list']|safe}</field>
+            <field name="model_id" ref="product.model_product_product"/>
+            <field name="body_html" type="html">
+                <table border="0" width="100%" cellpadding="0" bgcolor="#7C7BAD"
+                       style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                       summary="o_mail_notification">
+                    <tbody>
+                        % set company = ctx.get('company')
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table width="750" border="0" cellpadding="0" bgcolor="#875A7B"
+                                       style="min-width: 590px; background-color: #7C7BAD; padding: 20px; border-collapse:separate;">
+                                    <tr>
+                                        <td>
+                                            <span style="font-size:20px; color:white; font-weight: bold;">
+                                                Product Expiry Alert
+                                            </span>
+                                        </td>
+                                        <td align="right">
+                                            <!--<img src="/logo.png?company=${company.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${company.name}"/>-->
+                                            <!--<img src="/logo.png?company=${user.company_id.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${user.company_id.name}"/>-->
+                                            <!--<img src="/logo.png?company=${company.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${company.name}"/>-->
+                                            <!--<img src="/web/image/res.company/${company.id}/logo" type="base64" style="width:80px;"></img>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr style="border:0">
+                            <td align="center" style="min-width: 690px;">
+                                <table width="750" border="0" cellpadding="0" bgcolor="#ffffff"
+                                       style="min-width: 590px; background-color: rgb(255, 255, 255); padding: 20px; border-collapse:separate;">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <td colspan="3"
+                                                style="font-size:18px;font-weight:600;text-align:left;padding-bottom:10px;">
+                                                Following Products are going to be Expire soon
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:250px;text-align:left;font-size:15px;font-weight: 700;">
+                                                Stock
+                                            </td>
+                                            <td style="width:250px;text-align:left;font-size:15px;font-weight: 700;">
+                                                Lot
+                                            </td>
+                                            <td style="width:250px;text-align:left;font-size:15px;font-weight: 700;">
+                                                Product
+                                            </td>
+                                            <td style="width: 135px;text-align:left;font-size:15px;font-weight: 700;">
+                                                Expiry Date
+                                            </td>
+                                            <td align="right"
+                                                style="width: 125px;text-align:right;font-size:15px;font-weight: 700;">
+                                                Quantity
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        % set data_list = ctx.get('data_list')
+                                        % for each_product in data_list:
+                                        <tr>
+                                            <td valign="top" style="text-align:left;
+                                                font-family:Arial,Helvetica,sans-serif; color: dimgray; font-size: 14px;
+                                                 font-weight: 600;">${each_product.stock_location}
+                                            </td>
+                                            <td style="text-align:left;font-family:Arial,Helvetica,sans-serif;
+                                                color: dimgray; font-weight: 600;font-size: 14px;">
+                                                ${each_product.lot_number}
+                                            </td>
+                                            <td style="text-align:left;font-family:Arial,Helvetica,sans-serif;
+                                                color: dimgray;  font-weight: 600;font-size: 14px;">
+                                                ${each_product.product}
+                                            </td>
+                                            <td style="text-align:left;font-family:Arial,Helvetica,sans-serif;
+                                                color: dimgray;  font-weight: 600;font-size: 14px;">
+                                                ${each_product.life_date}
+                                            </td>
+                                            <td style="text-align:right;font-family:Arial,Helvetica,sans-serif;
+                                                color: dimgray;  font-weight: 600;font-size: 14px;">
+                                                ${each_product.quantity}
+                                            </td>
+                                        </tr>
+                                        % endfor
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- FOOTER -->
+                        <tr>
+                            <td align="center" style="min-width: 590px;">
+                                <table width="750" border="0" cellpadding="0" bgcolor="#7C7BAD"
+                                       style="min-width: 590px; background-color: #7C7BAD; padding: 20px; border-collapse:separate;">
+                                    <tr>
+                                        <td align="right" style="color:white; font-size: 13px;">
+                                            ${company.name}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="a" align="right" style="color:white !important; font-size: 13px;">
+                                            <span style="color:white !important">
+                                                % if company.email:
+                                                ${company.email}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" style="color: white; font-size: 13px;">
+                                            ${company.phone or ''}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="a" valign="middle" align="right"
+                                            style="color: white !important; font-size: 13px;">
+                                            <span style="color:white !important">
+                                                % endif
+
+                                                % if company.website:
+                                                ${company.website}
+                                                % endif
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                Powered by
+                                <a style="color:blue !important;" target="_blank" href="https://acespritech.com/">
+                                    Acespritech Solutions Pvt. Ltd.
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </field>
+        </record>
+    </data>
+</odoo>

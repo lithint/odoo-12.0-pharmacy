@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="pos_recurrent_order_form" model="ir.ui.view">
+            <field name="name">pos recurrent order form</field>
+            <field name="model">pos.recurrent.order</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button"
+                                       options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="pos_config_id"/>
+                                <field name="pos_user_id"/>
+                                <field name="next_exe_date"/>
+                            </group>
+                            <group>
+                                <field name="no_of_day"/>
+                                <field name="is_deliver"/>
+                                <field name="deli_address" attrs="{'invisible':[('is_deliver','=',False)]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="Products">
+                                    <field name="product_line">
+                                        <tree editable="top">
+                                            <field name="product_id"/>
+                                            <field name="qty"/>
+                                            <field name="unit_price"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- giftcard search> -->
+        <record id="view_recurrent_filter" model="ir.ui.view">
+            <field name="name">recurrent search View</field>
+            <field name="model">pos.recurrent.order</field>
+            <field name="arch" type="xml">
+                <search string="Search Recurrent Order">
+                    <field name="partner_id" filter_domain="[('partner_id','ilike', self)]"/>
+                    <filter name="is_deliver" string="Is Deliver"
+                            domain="[('is_deliver','=',True)]"/>
+                    <filter name="is_active" string="Active Filter"
+                            domain="[('is_active','=',True)]"/>
+                    <filter name="deactive" string="Dective Filter"
+                            domain="[('is_active','=',False)]"/>
+                    <group string="Group">
+                        <filter name="partner_id" string="Customer"
+                                domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter name="next_exe_date" string="Next Execution Date"
+                                domain="[]" context="{'group_by':'next_exe_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="pos_recurrent_order_tree" model="ir.ui.view">
+            <field name="name">pos recurrent order tree</field>
+            <field name="model">pos.recurrent.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="partner_id"/>
+                    <field name="is_deliver"/>
+                    <field name="next_exe_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_recurrent_order_form" model="ir.actions.act_window">
+            <field name="name">Automatic Refill Medicine</field>
+            <field name="res_model">pos.recurrent.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="point_of_sale.menu_point_config_product"
+                  name="Configuration" parent="point_of_sale.menu_point_root"
+                  sequence="100" groups="point_of_sale.group_pos_manager"/>
+
+        <!--         <menuitem id="aspl_gift_card_main_menu" name="Gift Card" -->
+        <!--             parent="point_of_sale.menu_point_root" /> -->
+
+        <menuitem id="recurrent_order_menu" name="Automatic Refill Medicine"
+                  parent="point_of_sale.menu_point_root" sequence="1"
+                  action="action_recurrent_order_form"/>
+
+    </data>
+</odoo>

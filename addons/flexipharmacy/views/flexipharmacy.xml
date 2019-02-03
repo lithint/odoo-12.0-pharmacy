@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- vim:fdn=3:-->
+<odoo>
+    <data>
+        <template id="index" name="flexipharmacy index" inherit_id="point_of_sale.index">
+            <xpath expr="." position="inside">
+
+                <t t-call="flexipharmacy.assets_gmaps"/>
+
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/screens.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/models.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/chrome.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/gui.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/db.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/popup.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/keyboard_shortcut.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/indexed_db.js"></script>
+
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/pos_theme.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/category_slider.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/multi_terminal_lock.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/pos.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/order_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/datepicker.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/login.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/client_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/products.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/simple-sidebar.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/jquery.timepicker.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/jquery-ui.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/graph_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/gift_card_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/stock_picking_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/sale_order_screen.css"/>
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/jquery.datetimepicker.css"/>
+
+                <t t-call="flexipharmacy.assets_themes"/>
+
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/lib/jquery.simplePagination.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/lib/jquery-barcode.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/lib/markerclusterer.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/auto_complete_address.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/lib/jquery.timepicker.js"></script>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/lib/canvasjs.min.js"></script>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/lib/jquery.datetimepicker.full.min.js"></script>
+
+            </xpath>
+        </template>
+
+        <template id="flexipharmacy.assets_gmaps">
+            <t t-set="google_maps_api_key"
+               t-value="request.env['ir.config_parameter'].sudo().get_param('google_api_key')"/>
+            <script type="text/javascript" src="/flexipharmacy/static/src/js/lib/markerclusterer.js"/>
+            <script t-att-async="1" t-att-defer="1"
+                    t-attf-src="//maps.googleapis.com/maps/api/js?key=#{google_maps_api_key}&amp;libraries=places"></script>
+        </template>
+
+        <template id="flexipharmacy.assets_themes">
+            <t t-set="pos_theme_selector"
+               t-value="request.env['ir.config_parameter'].sudo().get_param('theme_selector')"/>
+            <t t-if="pos_theme_selector == False">
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/odoo_theme.css"/>
+            </t>
+            <t t-if="pos_theme_selector == 'blue-green'">
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/pharmacy_blue_green.css"/>
+            </t>
+            <t t-if="pos_theme_selector == 'purple-pink'">
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/pharmacy_purple_pink.css"/>
+            </t>
+            <t t-if="pos_theme_selector == 'orange-green'">
+                <link rel="stylesheet" type="text/css" href="/flexipharmacy/static/src/css/pharmacy_orange_green.css"/>
+            </t>
+        </template>
+
+        <template id="acespritech_assets_backend" name="map assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/view_manager.js"></script>
+
+                <!-- Backend Dashboard Files -->
+
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/amcharts.js"/>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/serial.js"/>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/pie.js"/>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/export.js"/>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/light.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/blob.js/blob.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/fabric.js/fabric.min.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/pdfmake/pdfmake.min.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/pdfmake/vfs_fonts.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/jszip/jszip.min.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/xlsx/xlsx.min.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/libs/FileSaver.js/FileSaver.min.js"/>
+                <script type="text/javascript" src="/flexipharmacy/static/src/js/backend_dashboard_js/dashboard.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/jquery.dataTables.min.js"/>
+                <script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/daterangepicker.js"/>
+                <!--<script type="text/javascript"
+                        src="/flexipharmacy/static/src/js/backend_dashboard_js/bootstrap-datepicker.js"/>-->
+                <link rel="stylesheet" href="/flexipharmacy/static/src/css/backend_dashboard_css/export.css"/>
+                <link rel="stylesheet" href="/flexipharmacy/static/src/css/backend_dashboard_css/style.css"/>
+                <link rel="stylesheet" href="/flexipharmacy/static/src/css/backend_dashboard_css/daterangepicker.css"/>
+                <link rel="stylesheet" href="/flexipharmacy/static/src/css/backend_dashboard_css/custom.css"/>
+
+            </xpath>
+        </template>
+
+        <template id="customer_screen_assets" name="pos_customer_screen assets">
+            <t t-call="web.assets_backend"/>
+            <script type="text/javascript" src="/flexipharmacy/static/src/js/customer_display.js"></script>
+            <link rel="stylesheet" href="/flexipharmacy/static/src/css/customer_screen.css"/>
+            <link rel="stylesheet" type="text/css" href="/web/static/lib/fontawesome/css/font-awesome.css"/>
+        </template>
+
+
+    </data>
+</odoo>
